@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,23 +6,39 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  serverElements = [];
-  newServerName = '';
-  newServerContent = '';
+  serverElements = [
+    { type: 'server', name: 'Test Server', content: 'Just a test!' }
+  ];
 
-  onAddServer() {
+  emittedNumbers: number[] = [];
+
+  onServerAdded(serverData: {name: string, content: string}) {
     this.serverElements.push({
       type: 'server',
-      name: this.newServerName,
-      content: this.newServerContent
+      name: serverData.name,
+      content: serverData.content
     });
   }
 
-  onAddBlueprint() {
+  onBlueprintAdded(blueprintData: {name: string, content: string}) {
     this.serverElements.push({
       type: 'blueprint',
-      name: this.newServerName,
-      content: this.newServerContent
+      name: blueprintData.name,
+      content: blueprintData.content
     });
+  }
+
+  onChangeFirst() {
+    this.serverElements[0].name = 'Changed';
+  }
+
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1);
+  }
+
+  onGameControllerEmission(emittedNumber: number) {
+    // console.log(emittedNumber);
+    this.emittedNumbers.push(emittedNumber);
+    // console.log(this.emittedNumbers.length);
   }
 }
