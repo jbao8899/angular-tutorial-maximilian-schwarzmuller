@@ -1,7 +1,10 @@
 <!-- <p>Shopping List</p> -->
 <div class="row">
     <div class="col-xs-10">
-        <app-shopping-edit></app-shopping-edit>
+        <app-shopping-edit
+            (ingredientToAdd)="onIngredientAdded($event)"
+        >
+        </app-shopping-edit>
         
         <hr>
         

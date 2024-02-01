@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
 
@@ -12,8 +12,14 @@ export class RecipeListComponent {
     new Recipe("Test Recipe",
       "This is simply a test",
       "https://upload.wikimedia.org/wikipedia/commons/c/c9/Illustrated_recipes%3B_%27Minted_Pineapple%27%2C_%27Quick_Tomato_Mold%27_Wellcome_L0072307.jpg"),
-      new Recipe("Test Recipe",
-      "This is simply a test",
+      new Recipe("Second Test Recipe",
+      "This is another test",
       "https://upload.wikimedia.org/wikipedia/commons/c/c9/Illustrated_recipes%3B_%27Minted_Pineapple%27%2C_%27Quick_Tomato_Mold%27_Wellcome_L0072307.jpg")
   ];
+
+  @Output() recipeToDisplay = new EventEmitter<Recipe>();
+
+  onDisplayRecipe(recipeToDisplay: Recipe) {
+    this.recipeToDisplay.emit(recipeToDisplay);
+  }
 }

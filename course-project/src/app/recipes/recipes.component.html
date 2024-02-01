@@ -1,9 +1,14 @@
 <!-- <p>Recipes</p> -->
 <div class="row">
     <div class="col-md-5">
-        <app-recipe-list></app-recipe-list>
+        <app-recipe-list (recipeToDisplay)="onDisplayRecipe($event)"></app-recipe-list>
     </div>
     <div class="col-md-7">
-        <app-recipe-detail></app-recipe-detail>
+        @if (recipeToDisplay !== null) {
+            <app-recipe-detail [recipeToDisplay]="recipeToDisplay"></app-recipe-detail>
+        }
+        @else {
+            <p>Please select a recipe.</p>
+        }
     </div>
 </div>
