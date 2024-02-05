@@ -13,8 +13,8 @@
     <div class="col-xs-12">
         @for (recipe_loop of recipes; track $index) {
             <app-recipe-item
-                [recipe]="recipe_loop"
-                (recipeSelected)="onDisplayRecipe(recipe_loop)">
+                [recipe]="recipe_loop">
+                <!--(recipeSelected)="onDisplayRecipe(recipe_loop)"> -> No longer needed because we use a service instead of chain of comms -->
             </app-recipe-item>
         }
     </div>
