@@ -4,10 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
+import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
+import { HostBindingHighlightDirective } from './host-binding-highlight/host-binding-highlight.directive';
+import { CustomPropertyBindingHighlightDirective } from './custom-property-binding-highlight/custom-property-binding-highlight.directive';
+import { UnlessDirective } from './unless/unless.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective,
+    HostBindingHighlightDirective,
+    CustomPropertyBindingHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,
