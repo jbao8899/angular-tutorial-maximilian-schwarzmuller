@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component /*, EventEmitter, Output*/ } from '@angular/core';
 
 // It would be acceptable to put this directly into the app folder, instead of into its own folder
 @Component({
@@ -7,10 +7,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
     collapsed = true;
-    @Output() pageSelection = new EventEmitter<string>();
 
-    onSelect(page : string) {
-        this.pageSelection.emit(page);
-    }
+    // No longer needed when we use routing
+    // @Output() pageSelection = new EventEmitter<string>();
+
+    // onSelect(page : string) {
+    //     this.pageSelection.emit(page);
+    // }
 }
   

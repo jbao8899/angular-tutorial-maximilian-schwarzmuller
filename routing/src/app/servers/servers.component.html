@@ -1,18 +1,28 @@
+<br />
 <div class="row">
-  <div class="col-xs-12 col-sm-4">
-    <div class="list-group">
-      <a
-        href="#"
-        class="list-group-item"
-        *ngFor="let server of servers">
-        {{ server.name }}
-      </a>
+    <div class="col-xs-12 col-sm-4">
+        <div class="list-group">
+            <!-- fragment="loading" adds #loading to end of URL
+                 Only allow editing of the server with an ID of 3 -->
+            <a
+                [routerLink]="['/servers', server.id]"
+                [queryParams]="{allowEdit: server.id === 3 ? '1' : '0'}" 
+                fragment="loading" 
+                class="list-group-item"
+                *ngFor="let server of servers">
+                {{ server.name }}
+            </a> 
+        </div>
     </div>
-  </div>
-  <div class="col-xs-12 col-sm-4">
-    <app-edit-server></app-edit-server>
-    <hr>
-    <app-server></app-server>
-  </div>
+    <div class="col-xs-12 col-sm-4">
+        <!-- <button class="btn btn-primary" (click)="onReload()">Reload Page (Currently Disabled)</button>
+        <br />
+        <app-edit-server></app-edit-server>
+        <hr />
+        <app-server></app-server> -->
+
+        <!-- For all child routes -->
+        <router-outlet></router-outlet>
+    </div>
 </div>
 

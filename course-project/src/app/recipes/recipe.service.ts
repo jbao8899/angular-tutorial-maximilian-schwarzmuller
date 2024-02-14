@@ -28,4 +28,8 @@ export class RecipeService {
 
         return this.recipes.slice(); // Deep copy
     }
+
+    getRecipe(index: number) {
+        return this.recipes[index];
+    }
 }

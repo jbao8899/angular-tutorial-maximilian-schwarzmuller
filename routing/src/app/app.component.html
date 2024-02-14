@@ -1,26 +1,58 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Servers</a></li>
-        <li role="presentation"><a href="#">Users</a></li>
-      </ul>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <ul class="nav nav-tabs">
+            <!-- href is not good, it reloads the whole page and causes all state to be lost when moving between tabs -->
+            <!-- <li role="presentation" class="active"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/servers">Servers</a></li>
+            <li role="presentation"><a href="/users">Users</a></li> -->
+
+            <!-- routerLink does not reload the page each time -->
+            <!-- routerLinkActive="active" will mark the currently selected tab -->
+            <!-- [routerLinkActiveOptions]="{exact: true} means to only add the class specified by routerLinkActive
+                 if the current path matches the routerLink, not if it contains it
+                 It is needed, as for instance, http://localhost:4200/users contains http://localhost:4200-->
+            <li
+                role="presentation"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/">Home</a>
+            </li>
+            <li role="presentation" routerLinkActive="active"><a routerLink="/servers">Servers</a></li> 
+            <li role="presentation" routerLinkActive="active"><a [routerLink]="['/users']">Users</a></li>
+
+            <!-- All links contain "http://localhost:4200/", so this will always be marked as active by routerLinkActive -->
+            <!-- <li role="presentation" routerLinkActive="active"><a routerLink="/">Home</a></li> -->
+
+            <!--"/servers" is an absolute path, while "servers" is relative. The latter will be added to the current path
+                Doing routerLink="servers" is fine here, because this is called in the root component, but will cause problems
+                anywhere else.
+                "./servers" is the same a "servers"
+                "../servers" means to go back one level, then to the servers page (from the current path)-->
+        </ul>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <app-home></app-home>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <!--The router-outlet directive tells the Angular router to load the component of the currently selected route here-->
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <app-users></app-users>
+
+    <!-- Below = put everything on one page-->
+    <!-- <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <app-home></app-home>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <app-servers></app-servers>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <app-users></app-users>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <app-servers></app-servers>
+        </div>
+    </div> -->
 </div>

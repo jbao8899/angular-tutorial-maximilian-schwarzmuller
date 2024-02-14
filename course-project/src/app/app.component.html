@@ -1,14 +1,18 @@
-<app-header (pageSelection)="changeCurrentPage($event)"></app-header>
+<app-header></app-header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      @if (currentPage == 'app-recipes') {
-        <app-recipes></app-recipes>
-      }
-      @else if (currentPage == 'app-shopping-list') {
-        <app-shopping-list></app-shopping-list>
-      }
+    <div class="row">
+        <div class="col-md-12">
+
+        <!-- @if (currentPage == 'app-recipes') {
+            <app-recipes></app-recipes>
+        }
+        @else if (currentPage == 'app-shopping-list') {
+            <app-shopping-list></app-shopping-list>
+        } -->
+
+        <!-- Cleaner method of choosing page -->
+        <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
 </div>

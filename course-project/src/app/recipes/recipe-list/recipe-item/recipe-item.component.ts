@@ -9,16 +9,18 @@ import { RecipeService } from '../../recipe.service';
 })
 export class RecipeItemComponent {
     @Input() recipe: Recipe;
+    @Input() index: number;
 
     // Can get the specific recipe within the list component!!!
     // No longer going Recipe Item -> Recipe List -> Recipes -> Recipe Details, but just using a service
     // @Output() recipeSelected = new EventEmitter<void>();
 
-    constructor(private recipeService: RecipeService) { }
+    constructor(/*private recipeService: RecipeService*/) { }
 
-    onDisplayRecipe() {
-        // this.recipeSelected.emit();
+    // No longer needed
+    // onDisplayRecipe() {
+    //     // this.recipeSelected.emit();
 
-        this.recipeService.selectedRecipe.emit(this.recipe);
-    } 
+    //     this.recipeService.selectedRecipe.emit(this.recipe);
+    // } 
 }

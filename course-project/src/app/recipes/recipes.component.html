@@ -6,11 +6,14 @@
         </app-recipe-list>
     </div>
     <div class="col-md-7">
-        @if (recipeToDisplay !== null) {
+        <!-- @if (recipeToDisplay !== null) {
             <app-recipe-detail [recipeToDisplay]="recipeToDisplay"></app-recipe-detail>
         }
         @else {
             <p>Please select a recipe.</p>
-        }
+        } -->
+
+        <!-- Display child routes -->
+        <router-outlet></router-outlet>
     </div>
 </div>
