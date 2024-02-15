@@ -1,0 +1,8 @@
+.container {
+    margin-top: 30px;
+}
+
+/* Add red border to input and select fields that the user has touched and which are invalid */
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
