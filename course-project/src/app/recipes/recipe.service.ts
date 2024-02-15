@@ -1,6 +1,7 @@
 import { EventEmitter } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
+import { Subject } from "rxjs";
 
 export class RecipeService {
     private recipes: Recipe[] = [
@@ -20,7 +21,11 @@ export class RecipeService {
             ])
     ];
     
-    selectedRecipe = new EventEmitter<Recipe>();
+    // selectedRecipe = new EventEmitter<Recipe>();
+
+    // Changing to service
+    // Not really needed, using routing to determine what to show instead
+    // selectedRecipe = new Subject<Recipe>();
 
     getRecipes() {
         // Would enable modifying this array, as it is returned by reference

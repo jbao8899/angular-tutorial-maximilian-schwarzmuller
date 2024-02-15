@@ -1,5 +1,6 @@
 import { EventEmitter } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
+import { Subject } from "rxjs";
 
 export class ShoppingListService {
     private ingredients: Ingredient[] = [
@@ -7,7 +8,8 @@ export class ShoppingListService {
         new Ingredient("Tomatoes", 10)
     ];
 
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
+    // ingredientsChanged = new EventEmitter<Ingredient[]>();
+    ingredientsChanged = new Subject<Ingredient[]>();
 
     getIngredients() {
         return this.ingredients.slice();
@@ -17,7 +19,10 @@ export class ShoppingListService {
         this.ingredients.push(new Ingredient(name, amount));
 
         // Tell the shopping list that we added a new ingredient, provide a new copy
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        // this.ingredientsChanged.emit(this.ingredients.slice());
+
+        // Using subjects
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
     AddMultipleIngredients(newIngredients: Ingredient[]) {
@@ -29,6 +34,9 @@ export class ShoppingListService {
         this.ingredients.push(...newIngredients);
 
         // Not needed, going back to recipe page will automatically regenerate it and display changes?
-        this.ingredientsChanged.emit(this.ingredients.slice()); 
+        // this.ingredientsChanged.emit(this.ingredients.slice()); 
+
+        // using subject instead
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 }
