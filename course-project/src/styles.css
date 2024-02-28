@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+/* Add red border to input and select fields that the user has touched and which are invalid */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

@@ -17,7 +17,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
 
     ngOnInit() {
-        this.ingredients = this.shoppingListService.getIngredients();
+        this.ingredients = this.shoppingListService.GetIngredients();
 
         // When the list of ingredients changes, update the local copy
         // of the ingredients list
@@ -30,6 +30,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    onSelectItem(index: number) {
+        // Other places can listen for this and see which item was selected 
+        this.shoppingListService.startedEditing.next(index);
     }
 
     // onIngredientAdded(newIngredient: Ingredient) {

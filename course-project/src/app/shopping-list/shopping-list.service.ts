@@ -7,12 +7,17 @@ export class ShoppingListService {
         new Ingredient("Apples", 5),
         new Ingredient("Tomatoes", 10)
     ];
-
+    
     // ingredientsChanged = new EventEmitter<Ingredient[]>();
     ingredientsChanged = new Subject<Ingredient[]>();
+    startedEditing = new Subject<number>();
 
-    getIngredients() {
+    GetIngredients() {
         return this.ingredients.slice();
+    }
+
+    GetIngredient(index: number) {
+        return this.ingredients[index];
     }
 
     AddIngredient(name: string, amount: number) {
@@ -37,6 +42,20 @@ export class ShoppingListService {
         // this.ingredientsChanged.emit(this.ingredients.slice()); 
 
         // using subject instead
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    UpdateIngredient(index: number, ingredient: Ingredient) {
+        this.ingredients[index] = ingredient;
+
+        // Announce update
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    DeleteIngredient(index: number) {
+        this.ingredients.splice(index, 1);
+
+        // Announce deletion
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 }

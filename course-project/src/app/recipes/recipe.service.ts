@@ -27,6 +27,8 @@ export class RecipeService {
     // Not really needed, using routing to determine what to show instead
     // selectedRecipe = new Subject<Recipe>();
 
+    recipesChanged = new Subject<Recipe[]>();
+
     getRecipes() {
         // Would enable modifying this array, as it is returned by reference
         // return this.recipes; 
@@ -36,5 +38,23 @@ export class RecipeService {
 
     getRecipe(index: number) {
         return this.recipes[index];
+    }
+
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+
+        this.recipesChanged.next(this.recipes);
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+
+        this.recipesChanged.next(this.recipes);
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+
+        this.recipesChanged.next(this.recipes);
     }
 }
