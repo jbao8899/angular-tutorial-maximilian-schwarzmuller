@@ -1,18 +1,41 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let server of servers"
-          [ngClass]="getStatusClasses(server)">
-          <span
-            class="badge">
-            {{ server.status }}
-          </span>
-          <strong>{{ server.name }}</strong> | {{ server.instanceType }} | {{ server.started }}
-        </li>
-      </ul>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <input type="text" [(ngModel)]="filteredStatus">
+            <br />
+            <button type="button" class="btn btn-primary" (click)="onAddServer()">Add Server</button>
+            <br />
+
+            <!--This does not correctly show that the status is "stable" after 2 seconds,
+                because Angular does not watch for changes in what appStatus is-->
+            <!-- <h2>App Status: {{ appStatus }}</h2> --> 
+            
+
+            <!--The async pipe recognizes that appStatus is a promise and will change when
+                it resolves in 2 seconds (nothing is printed before 2 seconds)
+                It also works for observables.-->
+            <h2>App Status: {{ appStatus | async }}</h2>
+
+            <hr />
+
+            <h2>Reversed text: {{ "The quick brown fox jumped over the lazy dog." | reverse }}</h2>
+
+            <hr />
+            <ul class="list-group">
+                <li
+                class="list-group-item"
+                *ngFor="let server of servers | filter:filteredStatus:'status' | sort:'name'"
+                [ngClass]="getStatusClasses(server)">
+                <!--Filter on filteredStatus field-->
+                <span
+                    class="badge">
+                    {{ server.status }}
+                </span>
+                <strong>{{ server.name | shorten: 5 }}</strong>
+                | {{ server.instanceType | uppercase }} <!--Uppercasing pipe-->
+                | {{ server.started | date:'fullDate' | uppercase }} <!--date pipe cleans up how the date looks-->
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
