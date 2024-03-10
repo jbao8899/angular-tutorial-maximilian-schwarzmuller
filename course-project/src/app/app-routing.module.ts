@@ -5,21 +5,29 @@ import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
+import { RecipesResolverService } from "./recipes/recipes-resolver.service";
+import { AuthComponent } from "./auth/auth.component";
 
 const appRoutes: Routes = [
     { path: "", redirectTo: "/recipes", pathMatch: 'full' },
+
+    // will run RecipesResolverService before loading this route
     {
         path: "recipes",
         component: RecipesComponent,
+        resolve: [RecipesResolverService],
         children: [
             { path: '', component: RecipeStartComponent }, // http://localhost:4200/recipes
             { path: 'new', component: RecipeEditComponent }, // Must be before :id. Otherwise, "new" will be parsed as the id
+            
+            
             { path: ':id', component: RecipeDetailComponent },
             // Will determine if we are creating or editing a recipe within the RecipeEditComponent
-            { path: ':id/edit', component: RecipeEditComponent } 
+            { path: ':id/edit', component: RecipeEditComponent }   
         ]
     },
-    { path: "shopping-list", component: ShoppingListComponent }
+    { path: "shopping-list", component: ShoppingListComponent },
+    { path: "auth", component: AuthComponent }
 ]
 
 @NgModule({

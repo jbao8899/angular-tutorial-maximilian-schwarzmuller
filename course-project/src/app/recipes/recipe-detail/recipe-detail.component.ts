@@ -16,6 +16,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     recipeToDisplay: Recipe;
     id: number;
     subscription: Subscription;
+    recipesChangedSub: Subscription;
 
     constructor(
         private recipeService: RecipeService,
@@ -34,6 +35,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
                 this.recipeToDisplay = this.recipeService.getRecipe(this.id);
             }
         );
+        
+        // Does not update when details about current recipe change (like, by fetching data???)
     }
 
     onExportIngredientsToShoppingList() {
