@@ -1,8 +1,18 @@
+<ng-template appPlaceholder></ng-template>
+
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <div class="alert alert-danger" *ngIf="errorMessage"> <!--Only appears if errorMessage is not null-->
+        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            ngIf method of generating dynamic components (here) is much simpler than
+            generating it programatically, prefer it when possible
+            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+        <!-- <app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onHandleError()"></app-alert> -->
+
+        <!--Only appears if errorMessage is not null-->
+        <!-- <div class="alert alert-danger" *ngIf="errorMessage"> 
             <p>{{ errorMessage }} </p>
-        </div>
+        </div> -->
+        
         <div *ngIf="areLoading" style="text-align: center;">
             <app-loading-spinner />
         </div>

@@ -1,20 +1,28 @@
-import { Component } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { AuthResponseData, AuthService } from "./auth.service";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { AlertComponent } from "../shared/alert/alert.component";
+import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
     isLoginMode: boolean = true;
     areLoading: boolean = false;
     errorMessage: string = null;
 
+    private closePopUpSub: Subscription = null;
+
+    // Will find the first time appPlaceholder appears in the DOM
+    @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective; 
+
     constructor(
         private authService: AuthService,
+        private componentFactoryResolver: ComponentFactoryResolver,
         private router: Router
     ) {
 
@@ -57,8 +65,42 @@ export class AuthComponent {
                 console.log(errorMessage);
                 this.errorMessage = errorMessage;
                 this.areLoading = false;
+
+                // For programatically generating pop up (prefer ngIf over this when possible)
+                this.showErrorAlert(errorMessage);
             }
         )
         authForm.reset();
+    }
+
+    onHandleError() {
+        this.errorMessage = null;
+    }
+
+    private showErrorAlert(message: string) {
+        const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+
+        const hostViewContainerRef = this.alertHost.viewContainerRef;
+
+        // Clear anything that may already be there
+        hostViewContainerRef.clear();
+
+        const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
+        // New method, don't need component factory
+        // hostViewContainerRef.createComponent<AlertComponent>(AlertComponent)
+
+        componentRef.instance.message = message;
+        this.closePopUpSub = componentRef.instance.close.subscribe(
+            () => {
+                this.closePopUpSub.unsubscribe();
+                hostViewContainerRef.clear()
+            }
+        );
+    }
+
+    ngOnDestroy(): void {
+        if (this.closePopUpSub) {
+            this.closePopUpSub.unsubscribe();
+        }
     }
 }
