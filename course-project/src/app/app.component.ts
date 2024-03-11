@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
-export class AppComponent {
-  // currentPage = 'app-recipes';
+export class AppComponent implements OnInit {
+    constructor(
+        private authService: AuthService
+    ) {
 
-  // changeCurrentPage(page: string) {
-  //   this.currentPage = page;
-  // }
+    }
+
+    ngOnInit(): void {
+        this.authService.autoLogIn();
+    }
+
+    // currentPage = 'app-recipes';
+
+    // changeCurrentPage(page: string) {
+    //   this.currentPage = page;
+    // }
 }

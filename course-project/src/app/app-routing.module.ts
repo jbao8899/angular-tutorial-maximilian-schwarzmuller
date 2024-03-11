@@ -7,8 +7,10 @@ import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { RecipesResolverService } from "./recipes/recipes-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 const appRoutes: Routes = [
+    // If not logged in, we redirect to recipes, then to authentication component
     { path: "", redirectTo: "/recipes", pathMatch: 'full' },
 
     // will run RecipesResolverService before loading this route
@@ -16,6 +18,7 @@ const appRoutes: Routes = [
         path: "recipes",
         component: RecipesComponent,
         resolve: [RecipesResolverService],
+        canActivate: [AuthGuard],
         children: [
             { path: '', component: RecipeStartComponent }, // http://localhost:4200/recipes
             { path: 'new', component: RecipeEditComponent }, // Must be before :id. Otherwise, "new" will be parsed as the id
