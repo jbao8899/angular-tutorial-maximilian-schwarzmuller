@@ -10,7 +10,7 @@ import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 const routes: Routes = [
     // will run RecipesResolverService before loading this route
     {
-        path: "recipes",
+        path: "", // Must do this for lazy loading to work
         component: RecipesComponent,
         resolve: [RecipesResolverService],
         canActivate: [AuthGuard],

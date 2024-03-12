@@ -1,56 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 
-import { DropdownDirective } from './shared/dropdown.directive';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeService } from './recipes/recipe.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AlertComponent } from './shared/alert/alert.component';
-import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
-import { RecipesModule } from './recipes/recipes.module';
+import { HttpClientModule } from '@angular/common/http';
+// import { RecipesModule } from './recipes/recipes.module';
+// import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
+import { LoggingService } from './logging.service';
+// import { AuthModule } from './auth/auth.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        AuthComponent,
-        HeaderComponent,
-        LoadingSpinnerComponent,
-        ShoppingListComponent,
-        ShoppingEditComponent,
-        DropdownDirective,
-        AlertComponent,
-
-        PlaceholderDirective
+        HeaderComponent
     ],
     imports: [
         // BrowserModule can only be imported once, in AppModule
         // Use CommonModule elsewhere
         BrowserModule, 
-        FormsModule,
         HttpClientModule,
-        ReactiveFormsModule,
-        RecipesModule,
 
-        AppRoutingModule
+        AppRoutingModule,
+        // AuthModule, // Now being loaded lazily
+        CoreModule,
+        // RecipesModule, // Now being loaded lazily
+        SharedModule,
+        // ShoppingListModule // Now being loaded lazily
     ],
     providers: [
-        // Need this here, so one instance of this is shared in all places.
-        //Won't have recipes disappear when you go to shopping list page
-        // Services only need to be listed here, not in other modules
-        RecipeService,
-        ShoppingListService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
-        // @Injectable({ providedIn: "root" }) is equivalent to putting it here???
+        // should be in CoreModule, included here for demonstration
+        LoggingService
     ],
     // What component is available in index.html. Typically only one component is put here
     // Rarely, there may be multiple

@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Subscription } from 'rxjs';
+import { LoggingService } from '../logging.service';
 
 @Component({
     selector: 'app-shopping-list',
@@ -12,7 +13,12 @@ import { Subscription } from 'rxjs';
 export class ShoppingListComponent implements OnInit, OnDestroy {
     ingredients: Ingredient[];
 
-    constructor(private shoppingListService: ShoppingListService ) { }
+    constructor(
+        private loggingService: LoggingService,
+        private shoppingListService: ShoppingListService
+    ) { 
+
+    }
 
     private subscription: Subscription;
 
@@ -26,6 +32,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
                 this.ingredients = newIngredients;
             }
         ); // Don't need to change this when ingredientsChanged becomes a Subject instead of an EventEmitter
+    
+        this.loggingService.printLog("Hello from ShoppingListComponent.ngOnInit()");
     }
 
     ngOnDestroy(): void {
