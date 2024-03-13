@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+// Once we have marked the highlight directive as standalone, this module is no longer needed
 
-import { HighlightDirective } from './highlight.directive';
+// import { NgModule } from '@angular/core';
 
-@NgModule({
-  declarations: [HighlightDirective],
-  exports: [HighlightDirective],
-})
-export class SharedModule {}
+// import { HighlightDirective } from './highlight.directive';
+
+// @NgModule({
+//     declarations: [HighlightDirective],
+//     exports: [HighlightDirective],
+// })
+// export class SharedModule {}
