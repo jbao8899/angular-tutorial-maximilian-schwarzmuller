@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "course-project": {
+    "my-first-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/course-project",
+            "outputPath": "dist/my-first-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -35,7 +35,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -59,13 +59,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -74,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "course-project:build:production"
+              "buildTarget": "my-first-app:build:production"
             },
             "development": {
-              "buildTarget": "course-project:build:development"
+              "buildTarget": "my-first-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "course-project:build"
+            "buildTarget": "my-first-app:build"
           }
         },
         "test": {
@@ -110,6 +104,6 @@
     }
   },
   "cli": {
-    "analytics": "38fd4bbc-d6b6-4a22-aa89-be0b5a4ba677"
+    "analytics": "d7d5ba95-a22c-4431-b636-75d173f3b263"
   }
 }

@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment.development";
 
 export interface AuthResponseData {
     kind: string;
@@ -41,7 +42,7 @@ export class AuthService {
                 returnSecureToken: true
             },
             {
-                params: new HttpParams().set('key', 'AIzaSyBkTcwE2eTdVdrNRkG5QKwA7CE3KxuVxuA'),
+                params: new HttpParams().set('key', environment.firebaseAPIKey),
             }
         )
         .pipe(
@@ -64,7 +65,7 @@ export class AuthService {
                 returnSecureToken: true
             },
             {
-                params: new HttpParams().set('key', 'AIzaSyBkTcwE2eTdVdrNRkG5QKwA7CE3KxuVxuA'),
+                params: new HttpParams().set('key', environment.firebaseAPIKey),
             }
         )
         .pipe(

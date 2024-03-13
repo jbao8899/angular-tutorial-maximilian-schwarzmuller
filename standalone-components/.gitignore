@@ -40,10 +40,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-# Added, to protect API Keys
-# Do "ng generate environments" and add
-# firebaseAPIKey: "..."
-# to the relevant environments files
-/environments
-
