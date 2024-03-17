@@ -1,0 +1,17 @@
+<h1>Change Detection via Signals</h1>
+
+<div id="counter">
+    <!-- Must execute the signal as a function to get its value!!! -->
+    <p id="counter-output">Counter: {{ counter() }}</p>
+    <p id="counter-output">2 x Counter: {{ doubleCounter() }}</p>
+    <div id="counter-btns">
+        <button (click)="decrement()">Decrement</button>
+        <button (click)="increment()">Increment</button>
+    </div>
+</div>
+
+<h2>Action Log</h2>
+<ol id="log">
+    <!-- actions is a signal here, so you need to call it to get its value -->
+    <li *ngFor="let action of actions()">{{ action }}</li>
+</ol>
