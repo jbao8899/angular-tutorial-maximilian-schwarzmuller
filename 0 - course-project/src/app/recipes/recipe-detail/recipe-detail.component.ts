@@ -36,6 +36,13 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
             }
         );
         
+        this.recipesChangedSub = this.recipeService.recipesChanged.subscribe(
+            (newRecipes: Recipe[]) => {
+                // Update the current recipe
+                this.recipeToDisplay = this.recipeService.getRecipe(this.id);
+            } 
+        );
+
         // Does not update when details about current recipe change (like, by fetching data???)
     }
 
